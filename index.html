@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSSTG2YXZZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-KSSTG2YXZZ');
+    </script>
     <title>AI Garden Lab - Coming Soon</title>
     <style>
         * {
@@ -66,9 +76,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) rotate(0deg);
             }
+
             50% {
                 transform: translateY(-30px) rotate(180deg);
             }
@@ -212,6 +225,7 @@
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -223,6 +237,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -281,6 +296,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-shapes">
         <div class="shape"></div>
@@ -295,7 +311,7 @@
             We're cultivating something amazing! Our AI-powered garden lab is growing and will be ready to bloom soon.
         </p>
         <p class="domain">aigardenlab.com</p>
-        
+
         <!-- <form class="notify-form" onsubmit="handleNotify(event)">
             <input 
                 type="email" 
@@ -323,5 +339,5 @@
         }
     </script>
 </body>
-</html>
 
+</html>
