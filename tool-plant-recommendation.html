@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Plant Recommendation Tool | AI Garden Lab</title>
+    <meta name="description"
+        content="Find the perfect plants for your garden based on your climate, space, and sunlight availability using our AI-powered recommendation tool.">
+    <meta name="author" content="AI Garden Lab">
+    <link rel="canonical" href="https://aigardenlab.com/tool-plant-recommendation.html" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/main.svg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/main.svg">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha512-Dop/vW3iOtayerlYAqCgkVr2aTr2ErwwTYOvRFUpzl2VhCMJyjQF0Q9TjUXIo6JhuM/3i0vVEt2e/7QQmnHQqw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/tool-benefit-predictor.css"> <!-- Reusing styles -->
+    <link rel="stylesheet" type="text/css" href="css/tool-plant-recommendation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav id="menu" class="navbar navbar-default navbar-fixed-top on">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="index.html"
+                    style="display: flex; align-items: center; gap: 10px;">
+                    <img src="img/main.svg" alt="AI Garden Lab" style="height: 50px; width: auto;">
+                    AI Garden Lab
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="active"><a href="index.html#services">Tools</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tool Header -->
+    <header id="tool-header" class="text-center">
+        <div class="container">
+            <div class="section-title">
+                <h2>Smart Plant Recommendation</h2>
+                <p>Discover the best plants for your specific environmental conditions.</p>
+                <hr>
+            </div>
+        </div>
+    </header>
+
+    <!-- Recommendation Section -->
+    <section id="recommender-section">
+        <div class="container">
+            <div class="row">
+                <!-- Input Form -->
+                <div class="col-md-4 col-xs-12">
+                    <div class="calculator-card filter-panel">
+                        <h3><i class="fa fa-filter"></i> Your Conditions</h3>
+                        <form id="plantForm">
+
+                            <!-- 1. Climate Zone -->
+                            <div class="form-group">
+                                <label class="form-label">1. Climate Zone</label>
+                                <select id="climateZone" class="form-control">
+                                    <option value="tropical_wet">Tropical Wet</option>
+                                    <option value="subtropical">Subtropical</option>
+                                    <option value="temperate">Temperate</option>
+                                    <option value="tropical_dry">Tropical Dry</option>
+                                </select>
+                            </div>
+
+                            <!-- 2. Garden Type -->
+                            <div class="form-group">
+                                <label class="form-label">2. Garden Space</label>
+                                <div class="radio-cards column-layout">
+                                    <label class="radio-card">
+                                        <input type="radio" name="gardenType" value="indoor" checked>
+                                        <div class="card-content">
+                                            <i class="fa fa-home"></i>
+                                            <span>Indoor</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="gardenType" value="balcony">
+                                        <div class="card-content">
+                                            <i class="fa fa-building"></i>
+                                            <span>Balcony</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="gardenType" value="garden">
+                                        <div class="card-content">
+                                            <i class="fa fa-leaf"></i>
+                                            <span>Garden</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 3. Sunlight -->
+                            <div class="form-group">
+                                <label class="form-label">3. Sunlight Availability</label>
+                                <div class="btn-group-vertical" data-toggle="buttons" style="width: 100%;">
+                                    <label class="btn btn-default active">
+                                        <input type="radio" name="sunlight" value="partial" autocomplete="off" checked>
+                                        Partial / Indirect
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="sunlight" value="full_sun" autocomplete="off"> Full
+                                        Sun (>6 hrs)
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="sunlight" value="shade" autocomplete="off"> Shade /
+                                        Low Light
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 4. Season -->
+                            <div class="form-group">
+                                <label class="form-label">4. Current Season</label>
+                                <select id="season" class="form-control">
+                                    <option value="all">Any / Year-round</option>
+                                    <option value="summer">Summer</option>
+                                    <option value="winter">Winter</option>
+                                    <option value="spring">Spring</option>
+                                </select>
+                            </div>
+
+                            <button type="button" id="findPlantsBtn" class="btn btn-custom btn-lg btn-block"
+                                style="margin-top: 20px;">
+                                Find Matches <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Display -->
+                <div class="col-md-8 col-xs-12">
+
+                    <!-- Loading State -->
+                    <div id="loading-state" class="text-center" style="display: none; padding: 50px;">
+                        <i class="fa fa-spinner fa-spin fa-3x" style="color: #749c30;"></i>
+                        <p style="margin-top: 15px;">Analyzing thousands of plant profiles...</p>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="intro-state" class="text-center" style="padding: 80px 20px; color: #999;">
+                        <i class="fa fa-pagelines" style="font-size: 64px; margin-bottom: 20px; color: #ddd;"></i>
+                        <h3>Find Your Perfect Match</h3>
+                        <p>Select your environmental conditions on the left to see recommended plants.</p>
+                    </div>
+
+                    <!-- Results Grid -->
+                    <div id="results-grid" class="row" style="display: none;">
+                        <div class="col-md-12">
+                            <h3 class="results-heading">Top Recommendations <span id="match-count"
+                                    class="badge">0</span></h3>
+                        </div>
+                        <!-- Cards injected via JS -->
+                        <div id="plants-container"></div>
+                    </div>
+
+                    <div id="no-results" class="alert alert-warning text-center"
+                        style="display: none; margin-top: 20px;">
+                        <i class="fa fa-exclamation-triangle"></i> No exact matches found. Try adjusting your filters
+                        (e.g., try 'All' seasons).
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <div id="footer">
+        <div class="container text-center">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="footer-links text-center">
+                    <a href="about.html">About</a>
+                    <span class="separator">|</span>
+                    <a href="contact.html">Contact</a>
+                    <span class="separator">|</span>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="terms-conditions.html">Terms &amp; Conditions</a>
+                    <span class="separator">|</span>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+                <p>
+                    &copy; <span id="dynamic-year"></span> AI Garden Lab. Built with care for gardeners worldwide.
+                </p>
+                <p class="footer-disclaimer">
+                    Disclaimer: All tools and content on this site are for informational purposes only and do not
+                    replace professional advice.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="data/plants-data.js"></script>
+    <script src="js/tool-plant-recommendation.js"></script>
+
+</body>
+
+</html>

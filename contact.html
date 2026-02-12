@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Us | AI Garden Lab</title>
+    <meta name="description" content="Contact AI Garden Lab for questions, feedback, or inquiries about our free AI gardening tools and plant care advice.">
+    <meta name="author" content="AI Garden Lab">
+    <link rel="canonical" href="https://aigardenlab.com/contact.html" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/main.svg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/main.svg">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha512-Dop/vW3iOtayerlYAqCgkVr2aTr2ErwwTYOvRFUpzl2VhCMJyjQF0Q9TjUXIo6JhuM/3i0vVEt2e/7QQmnHQqw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="menu" class="navbar navbar-default navbar-fixed-top on">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html" style="display: flex; align-items: center; gap: 10px;">
+                    <img src="img/main.svg" alt="AI Garden Lab" style="height: 50px; width: auto;">
+                    AI Garden Lab
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#services">Tools</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li class="active"><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="contact-hero">
+        <div class="container">
+            <h1>Get in Touch</h1>
+            <p>Have questions about our AI tools or gardening advice? We're here to help you grow!</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="contact-card">
+                        <form id="contactForm" novalidate>
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="What should we call you?"
+                                    required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" class="form-control" placeholder="What is this about?"
+                                    required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" class="form-control" rows="6"
+                                    placeholder="Tell us how we can help you..." required></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <button type="submit" class="btn btn-custom btn-lg btn-block">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Footer Section -->
+    <div id="footer">
+        <div class="container text-center">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="footer-links text-center">
+                    <a href="about.html">About</a>
+                    <span class="separator">|</span>
+                    <a href="contact.html">Contact</a>
+                    <span class="separator">|</span>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="terms-conditions.html">Terms &amp; Conditions</a>
+                    <span class="separator">|</span>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+                <p>
+                    &copy; <span id="dynamic-year"></span> AI Garden Lab. Built with care for gardeners worldwide.
+                </p>
+                <p class="footer-disclaimer">
+                    Disclaimer: All tools and content on this site are for informational purposes only and do not
+                    replace professional advice.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+
+</html>

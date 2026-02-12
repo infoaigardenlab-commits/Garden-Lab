@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Environmental Benefit Predictor | AI Garden Lab</title>
+    <meta name="description"
+        content="Calculate the environmental impact of your garden: carbon sequestration, biodiversity support, and water conservation.">
+    <meta name="author" content="AI Garden Lab">
+    <link rel="canonical" href="https://aigardenlab.com/tool-benefit-predictor.html" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/main.svg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/main.svg">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha512-Dop/vW3iOtayerlYAqCgkVr2aTr2ErwwTYOvRFUpzl2VhCMJyjQF0Q9TjUXIo6JhuM/3i0vVEt2e/7QQmnHQqw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/tool-benefit-predictor.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav id="menu" class="navbar navbar-default navbar-fixed-top on">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="index.html"
+                    style="display: flex; align-items: center; gap: 10px;">
+                    <img src="img/main.svg" alt="AI Garden Lab" style="height: 50px; width: auto;">
+                    AI Garden Lab
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="active"><a href="index.html#services">Tools</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tool Header -->
+    <header id="tool-header" class="text-center">
+        <div class="container">
+            <div class="section-title">
+                <h2>Environmental Benefit Predictor</h2>
+                <p>Estimate the positive impact of your green space on the planet.</p>
+                <hr>
+            </div>
+        </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <section id="calculator-section">
+        <div class="container">
+            <div class="row">
+                <!-- Input Form -->
+                <div class="col-md-5 col-xs-12">
+                    <div class="calculator-card">
+                        <h3><i class="fa fa-sliders"></i> Garden Details</h3>
+                        <form id="ecoForm">
+
+                            <!-- 1. Garden Size -->
+                            <div class="form-group">
+                                <label class="form-label">1. Garden Size</label>
+                                <div class="radio-cards">
+                                    <label class="radio-card">
+                                        <input type="radio" name="gardenSize" value="small" checked>
+                                        <div class="card-content">
+                                            <i class="fa fa-home"></i>
+                                            <span>Small</span>
+                                            <small>
+                                                < 50m² (Balcony/Yard)</small>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="gardenSize" value="medium">
+                                        <div class="card-content">
+                                            <i class="fa fa-tree"></i>
+                                            <span>Medium</span>
+                                            <small>50-200m²</small>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="gardenSize" value="large">
+                                        <div class="card-content">
+                                            <i class="fa fa-pagelines"></i>
+                                            <span>Large</span>
+                                            <small>> 200m²</small>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 2. Primary Vegetation -->
+                            <div class="form-group">
+                                <label class="form-label">2. Dominant Vegetation</label>
+                                <select id="plantType" class="form-control">
+                                    <option value="mixed">Mixed Garden (Flowers & Veg)</option>
+                                    <option value="lawn">Lawn / Grass</option>
+                                    <option value="trees">Trees & Shrubs</option>
+                                    <option value="vegetables">Vegetable Patch</option>
+                                    <option value="wildflower">Wildflower Meadow</option>
+                                </select>
+                            </div>
+
+                            <!-- 3. Water Source -->
+                            <div class="form-group">
+                                <label class="form-label">3. Water Source</label>
+                                <div class="btn-group" data-toggle="buttons" style="width: 100%; display: flex;">
+                                    <label class="btn btn-default active" style="flex: 1;">
+                                        <input type="radio" name="waterSource" value="tap" autocomplete="off" checked>
+                                        Tap Water
+                                    </label>
+                                    <label class="btn btn-default" style="flex: 1;">
+                                        <input type="radio" name="waterSource" value="rain" autocomplete="off">
+                                        Rainwater
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 4. Fertilizer -->
+                            <div class="form-group">
+                                <label class="form-label">4. Fertilizer Type</label>
+                                <div class="btn-group" data-toggle="buttons" style="width: 100%; display: flex;">
+                                    <label class="btn btn-default active" style="flex: 1;">
+                                        <input type="radio" name="fertilizer" value="chemical" autocomplete="off"
+                                            checked> Chemical
+                                    </label>
+                                    <label class="btn btn-default" style="flex: 1;">
+                                        <input type="radio" name="fertilizer" value="organic" autocomplete="off">
+                                        Organic/Compost
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="button" id="calculateBtn" class="btn btn-custom btn-lg btn-block">
+                                Calculate Impact <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Results Display -->
+                <div class="col-md-7 col-xs-12">
+                    <div id="results-panel" class="results-card" style="display: none;">
+                        <div class="results-header">
+                            <h3><i class="fa fa-leaf"></i> Your Eco Impact Report</h3>
+                            <p>Based on your inputs, here is the estimated annual environmental contribution of your
+                                garden.</p>
+                        </div>
+
+                        <div class="row text-center metrics-row">
+                            <!-- Eco Score -->
+                            <div class="col-sm-4">
+                                <div class="metric-box">
+                                    <div class="score-circle" id="score-circle">
+                                        <span id="eco-score-val">0</span>
+                                        <small>/ 100</small>
+                                    </div>
+                                    <h4>Eco Impact Score</h4>
+                                </div>
+                            </div>
+
+                            <!-- Carbon -->
+                            <div class="col-sm-4">
+                                <div class="metric-box">
+                                    <i class="fa fa-cloud" style="color: #666;"></i>
+                                    <h2 id="carbon-val">0</h2>
+                                    <small>kg CO2 / year</small>
+                                    <h4>Carbon Sequestered</h4>
+                                </div>
+                            </div>
+
+                            <!-- Biodiversity -->
+                            <div class="col-sm-4">
+                                <div class="metric-box">
+                                    <i class="fa fa-bug" style="color: #e91e63;"></i>
+                                    <h2 id="bio-val">Wait</h2>
+                                    <small>Index</small>
+                                    <h4>Biodiversity</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="detailed-breakdown">
+                            <h4><i class="fa fa-list-alt"></i> Detailed Insights</h4>
+
+                            <!-- Air Quality -->
+                            <div class="insight-item">
+                                <h5><i class="fa fa-wind"></i> Air Quality Impact</h5>
+                                <p id="air-quality-desc">Analyzing...</p>
+                            </div>
+
+                            <!-- Water Conservation -->
+                            <div class="insight-item">
+                                <h5><i class="fa fa-tint"></i> Water Conservation</h5>
+                                <p id="water-desc">Analyzing...</p>
+                            </div>
+
+                            <!-- Recommendations -->
+                            <div class="recommendation-box">
+                                <h5><i class="fa fa-lightbulb-o"></i> Recommendation</h5>
+                                <p id="recommendation-text">Analyzing...</p>
+                            </div>
+                        </div>
+
+                        <div class="disclaimer-small">
+                            *Estimates based on data from IPCC and FAO models. Actual results may vary based on local
+                            conditions.
+                        </div>
+                    </div>
+
+                    <!-- Initial State / Placeholder -->
+                    <div id="initial-state" class="text-center" style="padding: 100px 20px; color: #999;">
+                        <i class="fa fa-calculator" style="font-size: 64px; margin-bottom: 20px; color: #ddd;"></i>
+                        <h3>Ready to calculate?</h3>
+                        <p>Enter your garden details on the left to see your environmental impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer Section -->
+    <div id="footer">
+        <div class="container text-center">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="footer-links text-center">
+                    <a href="about.html">About</a>
+                    <span class="separator">|</span>
+                    <a href="contact.html">Contact</a>
+                    <span class="separator">|</span>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <span class="separator">|</span>
+                    <a href="terms-conditions.html">Terms &amp; Conditions</a>
+                    <span class="separator">|</span>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+                <p>
+                    &copy; <span id="dynamic-year"></span> AI Garden Lab. Built with care for gardeners worldwide.
+                </p>
+                <p class="footer-disclaimer">
+                    Disclaimer: All tools and content on this site are for informational purposes only and do not
+                    replace professional advice.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="data/eco-coefficients.js"></script>
+    <script src="js/tool-benefit-predictor.js"></script>
+
+</body>
+
+</html>

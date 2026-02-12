@@ -1,0 +1,218 @@
+/* Smart Plant Recommendation Styles */
+
+#tool-header {
+  padding: 140px 0 50px;
+  background: #f9f9f9;
+}
+
+#recommender-section {
+  padding: 50px 0 150px;
+  min-height: 600px;
+}
+
+/* Filter Panel */
+.filter-panel {
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .filter-panel {
+    position: sticky;
+    top: 100px; /* Sticks when scrolling if supported */
+    z-index: 10;
+  }
+}
+
+/* Radio Cards - Reuse basic style but allow distinct layout */
+.radio-cards.column-layout {
+  flex-direction: row; /* Default row */
+  flex-wrap: wrap;
+}
+.radio-cards.column-layout .radio-card {
+  flex: 1 0 30%; /* 3 per row roughly */
+  min-width: 80px;
+}
+
+.btn-group-vertical .btn {
+  text-align: left;
+  margin-bottom: 5px;
+  border-radius: 4px !important;
+}
+
+/* Fix for dropdown misalignment on mobile/emulators */
+@media (max-width: 991px) {
+    .filter-panel, .calculator-card, .form-group {
+        position: static !important;
+        transform: none !important;
+        -webkit-transform: none !important;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+    clear: both;
+}
+
+select.form-control {
+  cursor: pointer;
+  background-color: #fff !important;
+  color: #333 !important;
+  display: block;
+  width: 100%;
+  position: relative; /* Sometimes needed for native anchors */
+}
+
+.calculator-card {
+    overflow: visible !important;
+}
+
+/* Force standard behavior for mobile select */
+select.form-control {
+    -webkit-appearance: menulist !important;
+    -moz-appearance: menulist !important;
+    appearance: menulist !important;
+    height: 45px !important;
+    line-height: normal !important;
+}
+
+/* Plant Result Card */
+.plant-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 50px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px); /* Ensure it doesn't overflow flex container height if set, though flex-wrap handles this. Just margin is enough. */
+  height: auto; /* Let it grow */
+  min-height: 100%; /* Fill the flex column */
+}
+
+.plant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.plant-img {
+  height: 200px;
+  background-color: #f0f0f0;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.match-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #749c30;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.plant-details {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.plant-category {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.plant-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 5px;
+}
+
+.scientific-name {
+  font-style: italic;
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.plant-tags {
+  margin-bottom: 15px;
+}
+
+.plant-tag {
+  display: inline-block;
+  background: #f4f4f4;
+  color: #666;
+  padding: 3px 8px;
+  font-size: 11px;
+  border-radius: 4px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.plant-care {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+  margin-top: auto;
+}
+
+.care-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #555;
+}
+
+.care-item i {
+  width: 20px;
+  color: #749c30;
+  margin-right: 8px;
+}
+
+/* Results Grid Alignment Fix */
+#plants-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px; /* Compensate for bootstrap row padding if needed */
+  margin-left: -15px;
+  margin-bottom: 50px;
+}
+
+/* Mobile Responsive Fix */
+@media (max-width: 767px) {
+  #plants-container {
+    display: block; /* Disable flex on mobile to allow natural stacking */
+  }
+  .plant-card {
+    height: auto;
+    margin-bottom: 30px;
+  }
+  .results-heading {
+    text-align: center;
+  }
+}
+
+@media (max-width: 991px) {
+  .filter-panel {
+    margin-bottom: 40px;
+  }
+}
+
+
+.results-heading {
+  margin-top: 0;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+  color: #333;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="toast-test-page">
+    <h1>Toast Notification Test</h1>
+    <p>Click the buttons below to test the toast notifications:</p>
+
+    <div class="test-buttons">
+        <button class="btn btn-success" onclick="showToast('This is a success message!', 'success')">Show Success
+            Toast</button>
+        <button class="btn btn-error" onclick="showToast('This is an error message!', 'error')">Show Error
+            Toast</button>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
