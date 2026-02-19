@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSSTG2YXZZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-KSSTG2YXZZ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blog | AI Garden Lab</title>
@@ -18,6 +26,82 @@
     <meta name="twitter:description" content="Gardening insights and plant care advice from AI Garden Lab." />
     <meta name="twitter:image" content="https://aigardenlab.com/img/home_1.jpg" />
     <link rel="canonical" href="https://aigardenlab.com/blog-fullscreen.html" />
+
+    <!-- Dynamic SEO: Option B — update meta tags per blog slug -->
+    <script>
+        (function () {
+            function slugify(str) {
+                return str.toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .trim()
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-');
+            }
+
+            var params = new URLSearchParams(window.location.search);
+            var slug = params.get('slug');
+            if (!slug) return;
+
+            // Blog metadata map — title, excerpt, image per slug
+            var blogs = [
+                { title: "Gardening for Biodiversity: How Nature-Friendly Gardens Benefit Wildlife and Human Wellbeing", excerpt: "Discover how nature-friendly gardens benefit wildlife, boost biodiversity, and improve human wellbeing through simple gardening choices.", image: "img/blogs/blog-1.png" },
+                { title: "What Is Biodiversity? How It Supports Healthy Gardens and Ecosystems", excerpt: "Understand biodiversity and learn how supporting diverse life in your garden leads to healthier ecosystems and a more resilient environment.", image: "img/blogs/blog-2.png" },
+                { title: "Top 5 Plants That Boost Biodiversity in Your Garden", excerpt: "Explore five key plants — dandelion, willow, bramble, clover, and ivy — that provide major support to biodiversity in your garden.", image: "img/blogs/blog-3.png" },
+                { title: "How to Create Your Garden Haven For Birds", excerpt: "Learn how to attract and support garden birds with the right food, native plants, nesting sites, and fresh water in your outdoor space.", image: "img/blogs/blog-4.png" },
+                { title: "A Shared Garden, A Shared Future: Protecting Pollinators Together", excerpt: "Find out how to protect bees, butterflies, and other pollinators by creating a wildflower-friendly, pesticide-free garden habitat.", image: "img/blogs/blog-5.png" },
+                { title: "Gardening for a Changing Climate: How Your Backyard Can Help Heal the Planet", excerpt: "Discover how climate-smart gardening practices like water conservation, composting, and planting native species help fight climate change.", image: "img/blogs/blog-6.png" },
+                { title: "Understanding How Cold Weather and Environment Affect Plant Survival", excerpt: "Learn how cold temperatures, frost, and seasonal changes affect plant hardiness, dormancy, and survival through winter.", image: "img/blogs/blog-7.png" },
+                { title: "The Impact of Climate Change on Water Resources and Global Water Security", excerpt: "Explore how climate change disrupts the water cycle, increasing floods and droughts, threatening global water security and ecosystems.", image: "img/blogs/blog-8.png" },
+                { title: "Health and Lifestyle Advantages of Gardening", excerpt: "Discover the physical, mental, and social health benefits of gardening — from stress relief and fitness to community bonding and nutrition.", image: "img/blogs/blog-9.png" },
+                { title: "Garden Hedges: A Simple Way to Add Privacy, Beauty, and Structure", excerpt: "Learn how to plant, feed, and prune garden hedges to create lasting privacy, structure, and natural beauty in your outdoor space.", image: "img/blogs/blog-10.png" },
+                { title: "How Environmental Factors Affect Plant Growth and Health", excerpt: "Understand how light, temperature, water, humidity, and nutrients interact to shape plant growth, health, and resilience in any garden.", image: "img/blogs/blog-11.png" },
+                { title: "Planting Native Trees: A Simple Yet Effective Method for Protecting Wildlife and Combating Climate Change", excerpt: "Planting native trees supports wildlife, sequesters carbon, improves air quality, and helps combat climate change from your own garden.", image: "img/blogs/blog-12.png" },
+                { title: "Let Road Verges Grow Wild: A Simple Way to Protect Nature and Pollinators", excerpt: "Road verges allowed to grow wild become vital refuges for wildflowers, pollinators, birds, and small mammals in managed landscapes.", image: "img/blogs/blog-13.png" },
+                { title: "Fast-Growing Indoor Plants: A Simple Way to Create a Healthy and Beautiful Home", excerpt: "Fast-growing indoor plants are beginner-friendly houseplants that quickly green up a room, improve air quality, and support wellbeing.", image: "img/blogs/blog-14.png" },
+                { title: "Garden to Income: How Small-Scale Gardening Contributes to Family Earnings", excerpt: "Small-scale home gardening can supplement household income, reduce expenses, and provide seasonal cash flow for families.", image: "img/blogs/blog-15.png" }
+            ];
+
+            var matched = null;
+            for (var i = 0; i < blogs.length; i++) {
+                if (slugify(blogs[i].title) === slug) {
+                    matched = blogs[i];
+                    break;
+                }
+            }
+            if (!matched) return;
+
+            var pageTitle = matched.title + ' | AI Garden Lab';
+            var desc = matched.excerpt;
+            var fullUrl = 'https://aigardenlab.com/blog-fullscreen.html?slug=' + slug;
+            var imgUrl = 'https://aigardenlab.com/' + matched.image;
+
+            // Update <title>
+            document.title = pageTitle;
+
+            // Helper to set or create a meta tag
+            function setMeta(selector, attr, value) {
+                var el = document.querySelector(selector);
+                if (!el) {
+                    el = document.createElement('meta');
+                    document.head.appendChild(el);
+                }
+                el.setAttribute(attr, value);
+            }
+
+            setMeta('meta[name="description"]', 'content', desc);
+            setMeta('meta[property="og:title"]', 'content', pageTitle);
+            setMeta('meta[property="og:description"]', 'content', desc);
+            setMeta('meta[property="og:image"]', 'content', imgUrl);
+            setMeta('meta[property="og:url"]', 'content', fullUrl);
+            setMeta('meta[name="twitter:title"]', 'content', pageTitle);
+            setMeta('meta[name="twitter:description"]', 'content', desc);
+            setMeta('meta[name="twitter:image"]', 'content', imgUrl);
+
+            // Update canonical
+            var canonical = document.querySelector('link[rel="canonical"]');
+            if (canonical) canonical.setAttribute('href', fullUrl);
+        })();
+    </script>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,7 +120,8 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -71,22 +156,22 @@
     </nav>
 
     <main id="main-content">
-    <div class="legal-page-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <a href="blogs.html" class="back-button"><i class="fa fa-arrow-left"></i> Back to All Blogs</a>
+        <div class="legal-page-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <a href="blogs.html" class="back-button"><i class="fa fa-arrow-left"></i> Back to All Blogs</a>
 
-                    <article id="blog-article" class="legal-content">
-                        <!-- Content will be injected here via JS -->
-                        <div class="text-center" style="padding: 100px 0;">
-                            <i class="fa fa-spinner fa-spin fa-3x" style="color: #749c30;"></i>
-                        </div>
-                    </article>
+                        <article id="blog-article" class="legal-content">
+                            <!-- Content will be injected here via JS -->
+                            <div class="text-center" style="padding: 100px 0;">
+                                <i class="fa fa-spinner fa-spin fa-3x" style="color: #749c30;"></i>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </main>
 
     <footer id="footer">
