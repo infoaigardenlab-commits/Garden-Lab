@@ -51,6 +51,12 @@ function createSlug(text) {
     .replace(/^-+|-+$/g, '');
 }
 
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr + 'T00:00:00Z');
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+}
+
 function searchBlogs(query) {
   const searchTerm = query.toLowerCase().trim();
   currentSearchResults = allBlogs.filter(blog =>
@@ -89,8 +95,8 @@ function displayBlogsOnPage() {
             <p>${blog.excerpt}</p>
           </div>
           <div class="blog-footer">
-            <span class="blog-category-text">${blog.category}</span>
-            <a href="blog-fullscreen.html?slug=${slug}" class="blog-read-more">Read More <i class="fa fa-arrow-right"></i></a>
+            <span class="blog-category-text">${blog.category}${blog.date ? ' · ' + formatDate(blog.date) : ''}</span>
+            <a href="blog-fullscreen.html?slug=${encodeURIComponent(slug)}" class="blog-read-more">Read More <i class="fa fa-arrow-right"></i></a>
           </div>
         </article>
       </div>

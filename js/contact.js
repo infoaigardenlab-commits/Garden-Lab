@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let isValid = true;
             let errorMessages = [];
             const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
             const subjectInput = document.getElementById('subject');
             const messageInput = document.getElementById('message');
 
@@ -51,6 +52,31 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 nameInput.closest('.form-group').classList.remove('has-error');
                 const helpBlock = nameInput.nextElementSibling;
+                if (helpBlock && helpBlock.classList.contains('help-block')) {
+                    helpBlock.textContent = '';
+                }
+            }
+
+            // Validate subject
+            if (!emailInput.value.trim()) {
+                isValid = false;
+                emailInput.closest('.form-group').classList.add('has-error');
+                const helpBlock = emailInput.nextElementSibling;
+                if (helpBlock && helpBlock.classList.contains('help-block')) {
+                    helpBlock.textContent = 'Email is required.';
+                }
+                errorMessages.push('Email is required');
+            } else if (!isValidEmail(emailInput.value.trim())) {
+                isValid = false;
+                emailInput.closest('.form-group').classList.add('has-error');
+                const helpBlock = emailInput.nextElementSibling;
+                if (helpBlock && helpBlock.classList.contains('help-block')) {
+                    helpBlock.textContent = 'Please enter a valid email address.';
+                }
+                errorMessages.push('Invalid email');
+            } else {
+                emailInput.closest('.form-group').classList.remove('has-error');
+                const helpBlock = emailInput.nextElementSibling;
                 if (helpBlock && helpBlock.classList.contains('help-block')) {
                     helpBlock.textContent = '';
                 }

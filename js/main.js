@@ -172,6 +172,12 @@ function createSlug(text) {
   return text.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+function formatBlogDate(dateStr) {
+  if (!dateStr) return '';
+  var date = new Date(dateStr + 'T00:00:00Z');
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+}
+
 // Load last 3 blogs into "Latest from our Blog" section on index page
 function loadLatestBlogs() {
   var container = document.getElementById('latest-blogs-row');
@@ -192,7 +198,7 @@ function loadLatestBlogs() {
       '<div class="blog-content"><h3>' + blog.title.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</h3>' +
       '<p>' + (blog.excerpt || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p></div>' +
       '<div class="blog-footer">' +
-      '<span class="blog-category-text">' + (blog.category || '').replace(/</g, '&lt;') + '</span>' +
+      '<span class="blog-category-text">' + (blog.category || '').replace(/</g, '&lt;') + (blog.date ? ' · ' + formatBlogDate(blog.date) : '') + '</span>' +
       '<a href="blog-fullscreen.html?slug=' + encodeURIComponent(slug) + '" class="blog-read-more">Read More <i class="fa fa-arrow-right"></i></a>' +
       '</div></div></div>';
   }).join('');
@@ -210,7 +216,7 @@ function loadBlogDetail() {
         document.title = (blog.title.length > 45 ? blog.title.substring(0, 42) + '...' : blog.title) + ' | AI Garden Lab';
         if (document.title.length > 60) document.title = blog.title.substring(0, 57) + '... | AI Garden Lab';
         const altText = blog.alt || blog.title;
-        const authorName = blog.author || 'Garden Lab Expert';
+        const authorName = blog.author || 'AI Garden Lab Team';
         const pubDate = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
         const absImg = blog.image.indexOf('http') === 0 ? blog.image : 'https://aigardenlab.com/' + blog.image.replace(/^\//, '');
         const absUrl = 'https://aigardenlab.com/blog-fullscreen.html?slug=' + encodeURIComponent(slug);
