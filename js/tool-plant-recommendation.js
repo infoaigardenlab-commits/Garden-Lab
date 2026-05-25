@@ -1,9 +1,26 @@
 
 document.addEventListener('DOMContentLoaded', function () {
+    if (!document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) {
+        const adsScript = document.createElement('script');
+        adsScript.async = true;
+        adsScript.crossOrigin = 'anonymous';
+        adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8289065661129245';
+        document.head.appendChild(adsScript);
+    }
 
     // Animate year
     const yearElement = document.getElementById('dynamic-year');
     if (yearElement) yearElement.textContent = new Date().getFullYear();
+
+    // Enforce clean initial UI state for first paint and history restores.
+    const introState = document.getElementById('intro-state');
+    const loadingState = document.getElementById('loading-state');
+    const resultsGrid = document.getElementById('results-grid');
+    const noResults = document.getElementById('no-results');
+    if (introState) introState.style.display = 'block';
+    if (loadingState) loadingState.style.display = 'none';
+    if (resultsGrid) resultsGrid.style.display = 'none';
+    if (noResults) noResults.style.display = 'none';
 
     const findPlantsBtn = document.getElementById('findPlantsBtn');
 
@@ -17,11 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const sunlight = document.querySelector('input[name="sunlight"]:checked').value;
 
             // 2. Show Loading State
-            document.getElementById('intro-state').style.display = 'none';
-            document.getElementById('results-grid').style.display = 'none';
-            document.getElementById('no-results').style.display = 'none';
-
-            const loadingState = document.getElementById('loading-state');
+            introState.style.display = 'none';
+            resultsGrid.style.display = 'none';
+            noResults.style.display = 'none';
             loadingState.style.display = 'block';
 
             // 3. Process (Simulate AI delay)
@@ -73,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Render Results
                 if (results.length > 0) {
                     renderPlants(results);
-                    document.getElementById('results-grid').style.display = 'block';
+                    resultsGrid.style.display = 'block';
                     document.getElementById('match-count').textContent = results.length;
 
                     // Scroll to results
@@ -82,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }, 500);
 
                 } else {
-                    document.getElementById('no-results').style.display = 'block';
+                    noResults.style.display = 'block';
                 }
 
             }, 1000); // 1s delay

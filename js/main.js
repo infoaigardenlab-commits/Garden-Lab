@@ -213,6 +213,21 @@ function loadBlogDetail() {
     if (slug && typeof blogsData !== 'undefined' && blogsData.blogs) {
       const blog = blogsData.blogs.find(b => createSlug(b.title) === slug);
       if (blog) {
+        const allBlogs = blogsData.blogs.slice();
+        const relatedBlogs = allBlogs
+          .filter(function (item) { return createSlug(item.title) !== slug; })
+          .filter(function (item) { return item.category === blog.category; })
+          .slice(0, 3);
+        if (relatedBlogs.length < 3) {
+          const fallbackBlogs = allBlogs
+            .filter(function (item) { return createSlug(item.title) !== slug; })
+            .filter(function (item) {
+              return !relatedBlogs.some(function (rb) { return rb.title === item.title; });
+            })
+            .slice(0, 3 - relatedBlogs.length);
+          Array.prototype.push.apply(relatedBlogs, fallbackBlogs);
+        }
+
         document.title = (blog.title.length > 45 ? blog.title.substring(0, 42) + '...' : blog.title) + ' | AI Garden Lab';
         if (document.title.length > 60) document.title = blog.title.substring(0, 57) + '... | AI Garden Lab';
         const altText = blog.alt || blog.title;
@@ -221,6 +236,22 @@ function loadBlogDetail() {
         const absImg = blog.image.indexOf('http') === 0 ? blog.image : 'https://aigardenlab.com/' + blog.image.replace(/^\//, '');
         const absUrl = 'https://aigardenlab.com/blog-fullscreen.html?slug=' + encodeURIComponent(slug);
         const desc = (blog.excerpt || blog.title).replace(/<[^>]+>/g, '').substring(0, 155);
+        const shareTitle = encodeURIComponent(blog.title);
+        const shareUrl = encodeURIComponent(absUrl);
+        const relatedHtml = relatedBlogs.map(function (item) {
+          const relatedSlug = createSlug(item.title);
+          const relatedImage = item.image || 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1000&auto=format&fit=crop';
+          const relatedExcerpt = (item.excerpt || '').replace(/<[^>]+>/g, '').trim();
+          return `
+            <div class="col-sm-4">
+              <a class="related-post-card" href="blog-fullscreen.html?slug=${encodeURIComponent(relatedSlug)}">
+                <img src="${relatedImage}" alt="${(item.alt || item.title).replace(/"/g, '&quot;')}" loading="lazy">
+                <h3>${item.title.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</h3>
+                <p>${relatedExcerpt.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+              </a>
+            </div>
+          `;
+        }).join('');
         $('#blog-article').html(`
           <div class="blog-header-meta">
             <span class="blog-detail-category">${blog.category}</span>
@@ -232,6 +263,23 @@ function loadBlogDetail() {
             <img src="${blog.image}" alt="${altText.replace(/"/g, '&quot;')}" loading="lazy" width="800" height="500" onerror="this.src='https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1000&auto=format&fit=crop'">
           </div>
           <div class="blog-content-body">${blog.content}</div>
+          <div class="blog-share-row">
+            <span class="share-label">Share:</span>
+            <a href="https://wa.me/?text=${shareTitle}%20${shareUrl}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </div>
+          <div class="blog-end-cta">
+            <h3>Use Our Free AI Gardening Tools</h3>
+            <p>Get practical recommendations for your plants and measure your garden's environmental impact.</p>
+            <a href="index.html#services" class="btn btn-custom">Try Free Tools</a>
+          </div>
+          ${relatedBlogs.length ? `
+            <section class="related-posts-section">
+              <h2>Related Posts</h2>
+              <div class="row">${relatedHtml}</div>
+            </section>
+          ` : ''}
         `);
         var metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', desc);

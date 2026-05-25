@@ -1,9 +1,22 @@
 
 document.addEventListener('DOMContentLoaded', function () {
+    if (!document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) {
+        const adsScript = document.createElement('script');
+        adsScript.async = true;
+        adsScript.crossOrigin = 'anonymous';
+        adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8289065661129245';
+        document.head.appendChild(adsScript);
+    }
 
     // Animate year in footer
     const yearElement = document.getElementById('dynamic-year');
     if (yearElement) yearElement.textContent = new Date().getFullYear();
+
+    // Enforce clean initial UI state on first load and browser back/forward cache restores.
+    const resultsPanel = document.getElementById('results-panel');
+    const initialState = document.getElementById('initial-state');
+    if (resultsPanel) resultsPanel.style.display = 'none';
+    if (initialState) initialState.style.display = 'block';
 
     // Calculator Logic
     const calculateBtn = document.getElementById('calculateBtn');
@@ -82,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Hide Initial, Show Results
             document.getElementById('initial-state').style.display = 'none';
-            const resultsPanel = document.getElementById('results-panel');
             resultsPanel.style.display = 'block';
             resultsPanel.classList.add('fade-in');
 
