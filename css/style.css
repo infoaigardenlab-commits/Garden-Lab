@@ -1640,6 +1640,114 @@ label {
 	object-fit: cover !important;
 }
 
+.blog-content-body {
+	font-size: 17px !important;
+	line-height: 1.9 !important;
+	color: #2f2f2f !important;
+}
+
+.blog-content-body h2,
+.blog-content-body h3 {
+	color: #2c4c1a !important;
+	margin-top: 28px !important;
+}
+
+.blog-share-row {
+	display: flex !important;
+	align-items: center !important;
+	gap: 10px !important;
+	flex-wrap: wrap !important;
+	margin-top: 24px !important;
+}
+
+.blog-share-row .share-label {
+	font-weight: 700 !important;
+	color: #2c4c1a !important;
+}
+
+.blog-share-row a {
+	display: inline-block !important;
+	padding: 8px 14px !important;
+	border-radius: 999px !important;
+	border: 1px solid #d8e6c4 !important;
+	color: #436323 !important;
+	text-decoration: none !important;
+	font-weight: 700 !important;
+	font-size: 13px !important;
+}
+
+.blog-share-row a:hover {
+	background: #749c30 !important;
+	border-color: #749c30 !important;
+	color: #fff !important;
+}
+
+.blog-end-cta {
+	margin-top: 32px !important;
+	padding: 28px !important;
+	border-radius: 16px !important;
+	background: #f6fbe9 !important;
+	border: 1px solid #e5efcf !important;
+	text-align: center !important;
+}
+
+.blog-end-cta h3 {
+	margin-top: 0 !important;
+	margin-bottom: 10px !important;
+	color: #2c4c1a !important;
+	font-weight: 800 !important;
+}
+
+.blog-end-cta p {
+	margin-bottom: 16px !important;
+	color: #4b4b4b !important;
+}
+
+.related-posts-section {
+	margin-top: 42px !important;
+}
+
+.related-posts-section h2 {
+	font-size: 30px !important;
+	font-weight: 800 !important;
+	color: #2c4c1a !important;
+	margin-bottom: 20px !important;
+}
+
+.related-post-card {
+	display: block !important;
+	background: #fff !important;
+	border: 1px solid #ebebeb !important;
+	border-radius: 14px !important;
+	overflow: hidden !important;
+	text-decoration: none !important;
+	margin-bottom: 20px !important;
+	min-height: 100% !important;
+}
+
+.related-post-card img {
+	width: 100% !important;
+	height: 140px !important;
+	object-fit: cover !important;
+}
+
+.related-post-card h3 {
+	font-size: 16px !important;
+	font-weight: 700 !important;
+	line-height: 1.4 !important;
+	color: #2c4c1a !important;
+	padding: 14px 14px 8px !important;
+	margin: 0 !important;
+}
+
+.related-post-card p {
+	font-size: 13px !important;
+	line-height: 1.5 !important;
+	color: #666 !important;
+	padding: 0 14px 14px !important;
+	margin: 0 !important;
+}
+
 /* UTILS */
 .blog-date,
 .blog-author,
