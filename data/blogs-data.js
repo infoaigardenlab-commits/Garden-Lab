@@ -160,7 +160,7 @@ const blogsData = {
       "date": "2025-01-05",
       "author": "Garden Lab Expert",
       "category": "Pollinators",
-      "image": "img/blogs/blog-5.png",
+      "image": "img/blogs/blog-5.jpg",
       "alt": "Pollinator-friendly garden with bees and wildflowers",
       "readTime": 9,
       "content": `<h2>Introduction</h2>
