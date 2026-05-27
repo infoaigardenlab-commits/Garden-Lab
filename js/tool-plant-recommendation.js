@@ -24,24 +24,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const findPlantsBtn = document.getElementById('findPlantsBtn');
 
-    if (findPlantsBtn) {
-        findPlantsBtn.addEventListener('click', function () {
+    function runRecommendations(shouldScroll) {
 
-            // 1. Get Inputs
-            const climateZone = document.getElementById('climateZone').value;
-            const season = document.getElementById('season').value;
-            const gardenType = document.querySelector('input[name="gardenType"]:checked').value;
-            const sunlight = document.querySelector('input[name="sunlight"]:checked').value;
+        // 1. Get Inputs
+        const climateZone = document.getElementById('climateZone').value;
+        const season = document.getElementById('season').value;
+        const gardenType = document.querySelector('input[name="gardenType"]:checked').value;
+        const sunlight = document.querySelector('input[name="sunlight"]:checked').value;
 
-            // 2. Show Loading State
-            introState.style.display = 'none';
-            resultsGrid.style.display = 'none';
-            noResults.style.display = 'none';
-            loadingState.style.display = 'block';
+        // 2. Show Loading State
+        introState.style.display = 'none';
+        resultsGrid.style.display = 'none';
+        noResults.style.display = 'none';
+        loadingState.style.display = 'block';
 
-            // 3. Process (Simulate AI delay)
-            setTimeout(() => {
-                loadingState.style.display = 'none';
+        // 3. Process (Simulate AI delay)
+        setTimeout(() => {
+            loadingState.style.display = 'none';
 
                 // Filter & Score Logic
                 const results = plantsData.plants.map(plant => {
@@ -85,24 +84,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 }).filter(p => p !== null)
                     .sort((a, b) => b.score - a.score); // Sort highest score first
 
-                // Render Results
-                if (results.length > 0) {
-                    renderPlants(results);
-                    resultsGrid.style.display = 'block';
-                    document.getElementById('match-count').textContent = results.length;
+            // Render Results
+            if (results.length > 0) {
+                renderPlants(results);
+                resultsGrid.style.display = 'block';
+                document.getElementById('match-count').textContent = results.length;
 
-                    // Scroll to results
+                // Scroll to results only for manual click.
+                if (shouldScroll) {
                     $('html, body').animate({
                         scrollTop: $("#results-grid").offset().top - 120
                     }, 500);
-
-                } else {
-                    noResults.style.display = 'block';
                 }
 
-            }, 1000); // 1s delay
+            } else {
+                noResults.style.display = 'block';
+            }
 
+        }, 1000); // 1s delay
+    }
+
+    if (findPlantsBtn) {
+        findPlantsBtn.addEventListener('click', function () {
+            runRecommendations(true);
         });
+        // Show initial recommendations using default-selected parameters.
+        runRecommendations(false);
     }
 
     function renderPlants(plants) {
