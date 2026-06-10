@@ -29,7 +29,10 @@ function setupEventListeners() {
 // Load blogs from embedded data
 function loadBlogs() {
   try {
-    allBlogs = blogsData.blogs;
+    // Sort blogs by date descending (latest first)
+    allBlogs = blogsData.blogs.slice().sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
     currentSearchResults = allBlogs;
     currentPage = 1;
     displayBlogsOnPage();
