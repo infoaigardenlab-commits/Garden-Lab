@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', function () {
         document.head.appendChild(adsScript);
     }
 
+    if (!document.querySelector('script[src*="resources.infolinks.com/js/infolinks_main.js"]')) {
+        const adsScript = document.createElement('script');
+        adsScript.type = 'text/javascript';
+        adsScript.src = 'http://resources.infolinks.com/js/infolinks_main.js';
+        document.head.appendChild(adsScript);
+    }
+
     // Animate year
     const yearElement = document.getElementById('dynamic-year');
     if (yearElement) yearElement.textContent = new Date().getFullYear();
@@ -42,47 +49,47 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
             loadingState.style.display = 'none';
 
-                // Filter & Score Logic
-                const results = plantsData.plants.map(plant => {
-                    let score = 85; // Base score for meeting strict criteria
+            // Filter & Score Logic
+            const results = plantsData.plants.map(plant => {
+                let score = 85; // Base score for meeting strict criteria
 
-                    // 1. Strict Filters (Must match to be included)
-                    const zoneMatch = plant.climate_zones.includes(climateZone) || plant.climate_zones.includes('all');
+                // 1. Strict Filters (Must match to be included)
+                const zoneMatch = plant.climate_zones.includes(climateZone) || plant.climate_zones.includes('all');
 
-                    let seasonMatch = true;
-                    if (season !== 'all') {
-                        seasonMatch = plant.seasons.includes(season) || plant.seasons.includes('all');
-                    }
+                let seasonMatch = true;
+                if (season !== 'all') {
+                    seasonMatch = plant.seasons.includes(season) || plant.seasons.includes('all');
+                }
 
-                    const sunMatch = plant.sunlight.includes(sunlight);
-                    const typeMatch = plant.garden_types.includes(gardenType);
+                const sunMatch = plant.sunlight.includes(sunlight);
+                const typeMatch = plant.garden_types.includes(gardenType);
 
-                    const isMatch = zoneMatch && seasonMatch && sunMatch && typeMatch;
+                const isMatch = zoneMatch && seasonMatch && sunMatch && typeMatch;
 
-                    if (!isMatch) return null;
+                if (!isMatch) return null;
 
-                    // 2. Bonus Scoring (for ranking)
+                // 2. Bonus Scoring (for ranking)
 
-                    // Season Bonus: Exact season match gets more points than broad 'all' support
-                    if (season !== 'all' && plant.seasons.includes(season)) {
-                        score += 5;
-                    }
+                // Season Bonus: Exact season match gets more points than broad 'all' support
+                if (season !== 'all' && plant.seasons.includes(season)) {
+                    score += 5;
+                }
 
-                    // Sunlight Preference: If it's their #1 favorite light condition
-                    if (plant.sunlight[0] === sunlight) {
-                        score += 5;
-                    }
+                // Sunlight Preference: If it's their #1 favorite light condition
+                if (plant.sunlight[0] === sunlight) {
+                    score += 5;
+                }
 
-                    // Random organic variance (0-4%)
-                    score += Math.floor(Math.random() * 5);
+                // Random organic variance (0-4%)
+                score += Math.floor(Math.random() * 5);
 
-                    // Cap at 100
-                    if (score > 100) score = 100;
+                // Cap at 100
+                if (score > 100) score = 100;
 
-                    plant.score = score;
-                    return plant;
-                }).filter(p => p !== null)
-                    .sort((a, b) => b.score - a.score); // Sort highest score first
+                plant.score = score;
+                return plant;
+            }).filter(p => p !== null)
+                .sort((a, b) => b.score - a.score); // Sort highest score first
 
             // Render Results
             if (results.length > 0) {
