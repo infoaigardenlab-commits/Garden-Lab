@@ -314,6 +314,45 @@ function loadBlogDetail() {
         script.type = 'application/ld+json';
         script.textContent = JSON.stringify(articleSchema);
         document.head.appendChild(script);
+
+        // Inject 300x250 banners and Smartlink CTA into article content
+        var bannerHtml = '<div style="text-align:center;margin:28px 0;"><script>atOptions={\'key\':\'c04f4d748669d1313daba8ed60cf3002\',\'format\':\'iframe\',\'height\':250,\'width\':300,\'params\':{}}<\/script><script src="https://www.highperformanceformat.com/c04f4d748669d1313daba8ed60cf3002/invoke.js"><\/script></div>';
+        var contentBody = document.querySelector('.blog-content-body');
+        if (contentBody) {
+          var paragraphs = contentBody.querySelectorAll('p');
+          var totalP = paragraphs.length;
+          // Banner 1: After paragraph 2-3
+          if (paragraphs[2]) {
+            paragraphs[2].insertAdjacentHTML('afterend', bannerHtml);
+          }
+          // Re-query after DOM change
+          paragraphs = contentBody.querySelectorAll('p');
+          totalP = paragraphs.length;
+          // Banner 2: Middle of article
+          var midIndex = Math.floor(totalP / 2);
+          if (paragraphs[midIndex]) {
+            paragraphs[midIndex].insertAdjacentHTML('afterend', bannerHtml);
+          }
+          // Re-query after DOM change
+          paragraphs = contentBody.querySelectorAll('p');
+          totalP = paragraphs.length;
+          // Banner 3: Before conclusion (last 2 paragraphs)
+          var preConclIndex = Math.max(0, totalP - 3);
+          if (paragraphs[preConclIndex]) {
+            paragraphs[preConclIndex].insertAdjacentHTML('beforebegin', bannerHtml);
+          }
+        }
+        // Show article end CTA and banner below related posts
+        var endCta = document.getElementById('article-end-cta');
+        if (endCta) endCta.style.display = 'block';
+
+        // Banner 4: Below related posts (inject after #blog-article)
+        var blogArticle = document.getElementById('blog-article');
+        if (blogArticle) {
+          var bannerAfterRelated = '<div style="text-align:center;margin:28px 0;"><script>atOptions={\'key\':\'c04f4d748669d1313daba8ed60cf3002\',\'format\':\'iframe\',\'height\':250,\'width\':300,\'params\':{}}<\/script><script src="https://www.highperformanceformat.com/c04f4d748669d1313daba8ed60cf3002/invoke.js"><\/script></div>';
+          blogArticle.insertAdjacentHTML('afterend', bannerAfterRelated);
+        }
+
         return;
       }
     }
