@@ -4,17 +4,16 @@ let currentSearchResults = [];
 let currentPage = 1;
 const blogsPerPage = 6;
 
-// Initialize page on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function () {
-  loadBlogs();
-  setupEventListeners();
+// Loaded with defer — DOM is ready and blogsData is available when this runs.
+// Initialise directly instead of waiting for DOMContentLoaded.
+loadBlogs();
+setupEventListeners();
 
-  // Update dynamic year in footer
-  const yearElement = document.getElementById('dynamic-year');
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-});
+// Update dynamic year in footer
+const yearElement = document.getElementById('dynamic-year');
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
 
 // Setup event listeners for filters and search
 function setupEventListeners() {

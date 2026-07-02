@@ -316,6 +316,8 @@ function loadBlogDetail() {
         document.head.appendChild(script);
 
         // Inject 300x250 banners and Smartlink CTA into article content
+        // Adsterra banner injection disabled
+        /*
         var bannerHtml = '<div style="text-align:center;margin:28px 0;"><script>atOptions={\'key\':\'c04f4d748669d1313daba8ed60cf3002\',\'format\':\'iframe\',\'height\':250,\'width\':300,\'params\':{}}<\/script><script src="https://www.highperformanceformat.com/c04f4d748669d1313daba8ed60cf3002/invoke.js"><\/script></div>';
         var contentBody = document.querySelector('.blog-content-body');
         if (contentBody) {
@@ -342,16 +344,17 @@ function loadBlogDetail() {
             paragraphs[preConclIndex].insertAdjacentHTML('beforebegin', bannerHtml);
           }
         }
+        */
         // Show article end CTA and banner below related posts
         var endCta = document.getElementById('article-end-cta');
         if (endCta) endCta.style.display = 'block';
 
-        // Banner 4: Below related posts (inject after #blog-article)
-        var blogArticle = document.getElementById('blog-article');
-        if (blogArticle) {
-          var bannerAfterRelated = '<div style="text-align:center;margin:28px 0;"><script>atOptions={\'key\':\'c04f4d748669d1313daba8ed60cf3002\',\'format\':\'iframe\',\'height\':250,\'width\':300,\'params\':{}}<\/script><script src="https://www.highperformanceformat.com/c04f4d748669d1313daba8ed60cf3002/invoke.js"><\/script></div>';
-          blogArticle.insertAdjacentHTML('afterend', bannerAfterRelated);
-        }
+        // Banner 4: Below related posts (inject after #blog-article) — disabled
+        // var blogArticle = document.getElementById('blog-article');
+        // if (blogArticle) {
+        //   var bannerAfterRelated = '<div style="text-align:center;margin:28px 0;"><script>atOptions={\'key\':\'c04f4d748669d1313daba8ed60cf3002\',\'format\':\'iframe\',\'height\':250,\'width\':300,\'params\':{}}<\/script><script src="https://www.highperformanceformat.com/c04f4d748669d1313daba8ed60cf3002/invoke.js"><\/script></div>';
+        //   blogArticle.insertAdjacentHTML('afterend', bannerAfterRelated);
+        // }
 
         return;
       }
@@ -361,29 +364,18 @@ function loadBlogDetail() {
 }
 
 // Wait for jQuery and blogsData to be available
+// blogs-data.js is now loaded with defer and executes before main.js (same defer order),
+// so blogsData is guaranteed to be defined here. No polling loop needed.
 if (typeof jQuery !== 'undefined') {
   $(document).ready(function () {
-    // Check if blogsData is already loaded
     if (typeof blogsData !== 'undefined') {
       loadBlogDetail();
       loadLatestBlogs();
     } else {
-      // Wait for blogsData to load
-      var checkBlogsData = setInterval(function () {
-        if (typeof blogsData !== 'undefined') {
-          clearInterval(checkBlogsData);
-          loadBlogDetail();
-          loadLatestBlogs();
-        }
-      }, 100);
-
-      // Timeout after 5 seconds
-      setTimeout(function () {
-        clearInterval(checkBlogsData);
-        if (typeof blogsData === 'undefined' && $('#blog-article').length) {
-          $('#blog-article').html('<div class="alert alert-danger">Unable to load blog data. <a href="blogs.html">Return to all blogs</a></div>');
-        }
-      }, 5000);
+      // Fallback: data not available (should not happen with defer ordering)
+      if ($('#blog-article').length) {
+        $('#blog-article').html('<div class="alert alert-danger">Unable to load blog data. <a href="blogs.html">Return to all blogs</a></div>');
+      }
     }
   });
 }

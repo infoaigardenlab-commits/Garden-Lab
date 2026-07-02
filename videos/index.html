@@ -593,24 +593,12 @@
 
 
       <aside class="ad-slot" aria-label="Advertisement">
-        <div class="ad-box">
-          <script>
-            atOptions = {
-              'key': '3bde97dccef4dd6fbb0b6f28b90697b2',
-              'format': 'iframe',
-              'height': 50,
-              'width': 320,
-              'params': {}
-            };
-          </script>
-          <script src="https://www.highperformanceformat.com/3bde97dccef4dd6fbb0b6f28b90697b2/invoke.js"></script>
-
-        </div>
+        <div class="ad-box" id="ad-top-320x50"></div>
       </aside>
       <section class="watch-layout" aria-label="Video player and playlist">
         <article class="player-panel" aria-labelledby="active-video-title">
           <div class="video-frame">
-            <video id="active-video" controls playsinline preload="metadata">
+            <video id="active-video" controls playsinline preload="none" poster="posters/Web_video_cover.png">
               <source id="active-video-source" src="media/Web_Video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -627,18 +615,7 @@
               rel="nofollow sponsored noopener">Try Server 4</a>
           </div>
           <aside class="ad-slot" style="border: none !important;" aria-label="Advertisement">
-            <div class="ad-box">
-              <script>
-                atOptions = {
-                  'key': '3bde97dccef4dd6fbb0b6f28b90697b2',
-                  'format': 'iframe',
-                  'height': 50,
-                  'width': 320,
-                  'params': {}
-                };
-              </script>
-              <script src="https://www.highperformanceformat.com/3bde97dccef4dd6fbb0b6f28b90697b2/invoke.js"></script>
-            </div>
+            <div class="ad-box" id="ad-mid-320x50"></div>
           </aside>
         </article>
       </section>
@@ -653,18 +630,7 @@
       </section>
 
       <aside class="ad-slot" aria-label="Advertisement">
-        <div class="ad-box">
-          <script>
-            atOptions = {
-              'key': 'c04f4d748669d1313daba8ed60cf3002',
-              'format': 'iframe',
-              'height': 250,
-              'width': 300,
-              'params': {}
-            };
-          </script>
-          <script src="https://www.highperformanceformat.com/c04f4d748669d1313daba8ed60cf3002/invoke.js"></script>
-        </div>
+        <div class="ad-box" id="ad-bottom-300x250"></div>
       </aside>
     </main>
   </div>
@@ -673,7 +639,32 @@
     href="https://www.effectivecpmnetwork.com/w1154kjaau?key=0429bf88461aa5051f130355c3827d59" target="_blank"
     rel="nofollow sponsored noopener">AI Resources</a>
 
-  <script src="https://pl29799848.effectivecpmnetwork.com/20/ea/0a/20ea0abdb79332688c2bfe37f84e3297.js"></script>
+  <!-- Ads load AFTER window.onload — page + video fully ready pehle, ads baad mein -->
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+
+        function injectAd(containerId, key, width, height) {
+          var el = document.getElementById(containerId);
+          if (!el) return;
+          var s1 = document.createElement('script');
+          s1.text = "atOptions={'key':'" + key + "','format':'iframe','height':" + height + ",'width':" + width + ",'params':{}};";
+          el.appendChild(s1);
+          var s2 = document.createElement('script');
+          s2.src = 'https://www.highperformanceformat.com/' + key + '/invoke.js';
+          el.appendChild(s2);
+        }
+
+        injectAd('ad-top-320x50',     '3bde97dccef4dd6fbb0b6f28b90697b2', 320,  50);
+        injectAd('ad-mid-320x50',     '3bde97dccef4dd6fbb0b6f28b90697b2', 320,  50);
+        injectAd('ad-bottom-300x250', 'c04f4d748669d1313daba8ed60cf3002',  300, 250);
+
+      }, 1000); // 1 second after load — page already interactive
+    });
+  </script>
+
+  <!-- Adsterra Social Bar -->
+  <!-- <script src="https://pl29799848.effectivecpmnetwork.com/20/ea/0a/20ea0abdb79332688c2bfe37f84e3297.js" defer></script> -->
 </body>
 
 </html>
