@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Balcony Herb Garden video poster</title>
+  <desc id="desc">AI Garden Lab poster with herb pots and balcony garden text.</desc>
+  <rect width="1280" height="720" fill="#eef6f5"/>
+  <rect x="56" y="56" width="1168" height="608" rx="28" fill="#18445c"/>
+  <rect x="728" y="188" width="330" height="316" rx="18" fill="#e6f1e6"/>
+  <rect x="774" y="438" width="238" height="60" rx="12" fill="#b76845"/>
+  <path d="M817 438c-72-118 30-206 76-96 42-119 151-40 81 96z" fill="#3c9a5f"/>
+  <path d="M850 426c-30-82 34-139 58-65 25-76 86-32 47 65z" fill="#8ccf82"/>
+  <text x="94" y="154" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">AI Garden Lab</text>
+  <text x="94" y="260" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="800">Balcony Herb Garden</text>
+  <text x="98" y="326" fill="#d6ebee" font-family="Arial, Helvetica, sans-serif" font-size="34">Grow useful herbs in compact spaces</text>
+  <circle cx="1060" cy="530" r="62" fill="#ffffff"/>
+  <path d="M1042 497v66l54-33z" fill="#18445c"/>
+</svg>

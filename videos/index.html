@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Video Hub</title>
+  <meta name="description"
+    content="Watch mobile-friendly videos with practical tips, helpful guidance, and simple ideas for every screen size." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aigardenlab.com/videos/" />
+  <link rel="shortcut icon" href="../img/main.svg" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="../img/main.svg" />
+  <meta name="theme-color" content="#163a2b" />
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f6f8f3;
+      --surface: #ffffff;
+      --surface-strong: #edf4ec;
+      --ink: #12231a;
+      --muted: #5b6b61;
+      --line: #dce7dc;
+      --accent: #256f46;
+      --accent-strong: #174f34;
+      --gold: #d7a83f;
+      --shadow: 0 16px 46px rgba(19, 45, 31, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--page);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background:
+        linear-gradient(180deg, rgba(37, 111, 70, 0.12), rgba(246, 248, 243, 0) 340px),
+        var(--page);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 20;
+      transform: translateY(-140%);
+      border-radius: 6px;
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .shell {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 14px 14px 92px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 54px;
+      padding: 6px 0 12px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      min-width: 0;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+    }
+
+    .brand span {
+      overflow-wrap: anywhere;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--accent-strong);
+      padding: 9px 13px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+      padding: 10px 0 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent-strong);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: 2.35rem;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero-text {
+      max-width: 720px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .quick-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .quick-meta span {
+      border: 1px solid rgba(37, 111, 70, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--accent-strong);
+      padding: 7px 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .watch-layout {
+      display: grid;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .ad-slot {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      width: 100%;
+      margin: 14px 0 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.86);
+      padding: 8px 8px;
+      text-align: center;
+    }
+
+    .ad-label {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .ad-box {
+      width: 320px;
+      min-height: 50px;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .player-panel,
+    .playlist-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #101b14;
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #101b14;
+    }
+
+    .server-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      padding: 12px;
+    }
+
+    .server-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: min(100%, 300px);
+      min-height: 48px;
+      border: 2px solid rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffbf1b, #ff5a1f 48%, #1db954);
+      color: #101b14;
+      font-size: 1rem;
+      font-weight: 900;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 0 0 rgba(255, 191, 27, 0.2);
+      animation: serverBlink 1.05s ease-in-out infinite;
+    }
+
+    .server-button:nth-child(2) {
+      animation-delay: 0.18s;
+    }
+
+    .server-button:nth-child(3) {
+      animation-delay: 0.36s;
+    }
+
+    .server-button:focus-visible {
+      outline: 3px solid rgba(255, 255, 255, 0.95);
+      outline-offset: 3px;
+    }
+
+    @keyframes serverBlink {
+
+      0%,
+      100% {
+        filter: brightness(1);
+        transform: translateY(0);
+        box-shadow: 0 0 0 rgba(255, 191, 27, 0.2);
+      }
+
+      50% {
+        filter: brightness(1.35);
+        transform: translateY(-1px);
+        box-shadow: 0 0 22px rgba(255, 191, 27, 0.72);
+      }
+    }
+
+    .video-copy {
+      padding: 16px;
+    }
+
+    .active-label {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .video-copy h2,
+    .playlist-panel h2 {
+      margin: 0;
+      font-size: 1.45rem;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .video-copy p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .video-note {
+      margin-top: 14px;
+      border-left: 4px solid var(--gold);
+      background: #fff8e8;
+      color: #644e19;
+      padding: 10px 12px;
+      font-size: 0.92rem;
+    }
+
+    .playlist-head {
+      padding: 15px 15px 10px;
+    }
+
+    .playlist-head p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .playlist {
+      display: grid;
+      gap: 10px;
+      max-height: none;
+      padding: 0 12px 14px;
+    }
+
+    .video-card {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 11px;
+      width: 100%;
+      min-height: 86px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 8px;
+      text-align: left;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .video-card[aria-current="true"] {
+      border-color: rgba(37, 111, 70, 0.62);
+      background: var(--surface-strong);
+      box-shadow: inset 0 0 0 1px rgba(37, 111, 70, 0.22);
+    }
+
+    .video-card:focus-visible,
+    .home-link:focus-visible,
+    .brand:focus-visible {
+      outline: 3px solid rgba(215, 168, 63, 0.9);
+      outline-offset: 3px;
+    }
+
+    .thumb {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      background: #dce7dc;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb::after {
+      content: "Play";
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      border-radius: 999px;
+      background: rgba(18, 35, 26, 0.86);
+      color: #fff;
+      padding: 3px 7px;
+      font-size: 0.68rem;
+      font-weight: 800;
+    }
+
+    .card-title {
+      display: block;
+      color: var(--ink);
+      font-size: 0.94rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.35;
+    }
+
+    .content-block {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 18px;
+    }
+
+    .content-block h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .content-block p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .smartlink-card {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      border: 1px solid rgba(37, 111, 70, 0.24);
+      border-radius: var(--radius);
+      background: #f4faef;
+      padding: 18px;
+    }
+
+    .smartlink-card .ad-label {
+      color: var(--accent-strong);
+    }
+
+    .smartlink-card h2 {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .smartlink-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .smartlink-button,
+    .floating-resource-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .smartlink-button {
+      width: fit-content;
+      padding: 11px 16px;
+    }
+
+    .floating-resource-btn {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 50;
+      max-width: calc(100vw - 28px);
+      padding: 10px 14px;
+      box-shadow: 0 10px 28px rgba(18, 35, 26, 0.24);
+      font-size: 0.92rem;
+    }
+
+    .smartlink-button:focus-visible,
+    .floating-resource-btn:focus-visible {
+      outline: 3px solid rgba(215, 168, 63, 0.9);
+      outline-offset: 3px;
+    }
+
+    @media (min-width: 720px) {
+      .shell {
+        padding: 18px 22px 96px;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      h1 {
+        font-size: 3.4rem;
+      }
+
+      .hero-text {
+        font-size: 1.12rem;
+      }
+
+      .video-copy {
+        padding: 22px;
+      }
+
+      .video-copy h2,
+      .playlist-panel h2 {
+        font-size: 1.85rem;
+      }
+
+      .playlist {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .smartlink-card {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+      }
+
+      .smartlink-card .ad-label,
+      .smartlink-card h2,
+      .smartlink-card p {
+        grid-column: 1;
+      }
+
+      .smartlink-button {
+        grid-column: 2;
+        grid-row: 1 / 4;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .watch-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .playlist-panel {
+        position: static;
+      }
+
+      .playlist {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-height: none;
+        overflow: visible;
+        padding-right: 12px;
+      }
+
+      h1 {
+        font-size: 4.35rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand {
+        font-size: 0.95rem;
+      }
+
+      .home-link {
+        min-height: 40px;
+        padding-inline: 10px;
+        font-size: 0.84rem;
+      }
+
+      .video-card {
+        grid-template-columns: 88px minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to video</a>
+  <div class="shell">
+    <main id="main-content">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <h1 id="page-title">Watch videos anywhere.</h1>
+          <p class="hero-text">If videos do not play, please check whether your browser, an extension, or an ad blocker
+            is blocking playback.</p>
+        </div>
+      </section>
+
+
+      <aside class="ad-slot" aria-label="Advertisement">
+        <div class="ad-box">
+          <script>
+            atOptions = {
+              'key': '3bde97dccef4dd6fbb0b6f28b90697b2',
+              'format': 'iframe',
+              'height': 50,
+              'width': 320,
+              'params': {}
+            };
+          </script>
+          <script src="https://www.highperformanceformat.com/3bde97dccef4dd6fbb0b6f28b90697b2/invoke.js"></script>
+
+        </div>
+      </aside>
+      <section class="watch-layout" aria-label="Video player and playlist">
+        <article class="player-panel" aria-labelledby="active-video-title">
+          <div class="video-frame">
+            <video id="active-video" controls playsinline preload="metadata">
+              <source id="active-video-source" src="media/Web_Video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="server-actions" aria-label="Sponsored server links">
+            <a class="server-button"
+              href="https://www.effectivecpmnetwork.com/w1154kjaau?key=0429bf88461aa5051f130355c3827d59" target="_blank"
+              rel="nofollow sponsored noopener">Try Server 2</a>
+            <a class="server-button"
+              href="https://www.effectivecpmnetwork.com/w1154kjaau?key=0429bf88461aa5051f130355c3827d59" target="_blank"
+              rel="nofollow sponsored noopener">Try Server 3</a>
+            <a class="server-button"
+              href="https://www.effectivecpmnetwork.com/w1154kjaau?key=0429bf88461aa5051f130355c3827d59" target="_blank"
+              rel="nofollow sponsored noopener">Try Server 4</a>
+          </div>
+          <aside class="ad-slot" style="border: none !important;" aria-label="Advertisement">
+            <div class="ad-box">
+              <script>
+                atOptions = {
+                  'key': '3bde97dccef4dd6fbb0b6f28b90697b2',
+                  'format': 'iframe',
+                  'height': 50,
+                  'width': 320,
+                  'params': {}
+                };
+              </script>
+              <script src="https://www.highperformanceformat.com/3bde97dccef4dd6fbb0b6f28b90697b2/invoke.js"></script>
+            </div>
+          </aside>
+        </article>
+      </section>
+
+      <section class="smartlink-card" aria-labelledby="sponsored-ai-title">
+        <span class="ad-label">Sponsored</span>
+        <h2 id="sponsored-ai-title">Explore AI tools and resources</h2>
+        <p>Open a recommended AI resource in a new tab while your gardening video remains available here.</p>
+        <a class="smartlink-button"
+          href="https://www.effectivecpmnetwork.com/w1154kjaau?key=0429bf88461aa5051f130355c3827d59" target="_blank"
+          rel="nofollow sponsored noopener">Explore Resources</a>
+      </section>
+
+      <aside class="ad-slot" aria-label="Advertisement">
+        <div class="ad-box">
+          <script>
+            atOptions = {
+              'key': 'c04f4d748669d1313daba8ed60cf3002',
+              'format': 'iframe',
+              'height': 250,
+              'width': 300,
+              'params': {}
+            };
+          </script>
+          <script src="https://www.highperformanceformat.com/c04f4d748669d1313daba8ed60cf3002/invoke.js"></script>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <a class="floating-resource-btn"
+    href="https://www.effectivecpmnetwork.com/w1154kjaau?key=0429bf88461aa5051f130355c3827d59" target="_blank"
+    rel="nofollow sponsored noopener">AI Resources</a>
+
+  <script src="https://pl29799848.effectivecpmnetwork.com/20/ea/0a/20ea0abdb79332688c2bfe37f84e3297.js"></script>
+</body>
+
+</html>
