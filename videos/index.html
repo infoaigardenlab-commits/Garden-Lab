@@ -203,9 +203,28 @@
       text-transform: uppercase;
     }
 
-    .ad-box {
+    /* ad-box-banner: reserved space for 320x50 slot — prevents layout shift.
+       Height fixed at 50px always so page doesn't jump when ad loads/swaps. */
+    .ad-box-banner {
       width: 320px;
-      min-height: 50px;
+      height: 50px;          /* fixed — never changes, no layout shift */
+      max-width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: height 0.25s ease; /* smooth if fallback expands to 250px */
+    }
+
+    .ad-box-banner.expanded {
+      height: 250px;         /* fallback: smoothly expands when 300x250 loads */
+      width: 300px;
+    }
+
+    /* bottom 300x250 slot — always reserved at full size */
+    .ad-box {
+      width: 300px;
+      height: 250px;
       max-width: 100%;
       overflow: hidden;
     }
@@ -593,7 +612,7 @@
 
 
       <aside class="ad-slot" aria-label="Advertisement">
-        <div class="ad-box" id="ad-top-320x50"></div>
+        <div class="ad-box-banner" id="ad-top-banner"></div>
       </aside>
       <section class="watch-layout" aria-label="Video player and playlist">
         <article class="player-panel" aria-labelledby="active-video-title">
@@ -615,7 +634,7 @@
               rel="nofollow sponsored noopener">Try Server 4</a>
           </div>
           <aside class="ad-slot" style="border: none !important;" aria-label="Advertisement">
-            <div class="ad-box" id="ad-mid-320x50"></div>
+            <div class="ad-box-banner" id="ad-mid-banner"></div>
           </aside>
         </article>
       </section>
@@ -644,6 +663,10 @@
     window.addEventListener('load', function () {
       setTimeout(function () {
 
+        var KEY_50  = '3bde97dccef4dd6fbb0b6f28b90697b2'; // 320x50
+        var KEY_250 = 'c04f4d748669d1313daba8ed60cf3002';  // 300x250
+
+        // Bottom slot — always 300x250, no fallback needed
         function injectAd(containerId, key, width, height) {
           var el = document.getElementById(containerId);
           if (!el) return;
@@ -655,11 +678,65 @@
           el.appendChild(s2);
         }
 
-        injectAd('ad-top-320x50',     '3bde97dccef4dd6fbb0b6f28b90697b2', 320,  50);
-        injectAd('ad-mid-320x50',     '3bde97dccef4dd6fbb0b6f28b90697b2', 320,  50);
-        injectAd('ad-bottom-300x250', 'c04f4d748669d1313daba8ed60cf3002',  300, 250);
+        // Banner slot — try 320x50 first, fallback to 300x250 if timeout
+        function injectBannerWithFallback(containerId) {
+          var el = document.getElementById(containerId);
+          if (!el) return;
 
-      }, 1000); // 1 second after load — page already interactive
+          // Step 1: inject 320x50
+          var s1 = document.createElement('script');
+          s1.text = "atOptions={'key':'" + KEY_50 + "','format':'iframe','height':50,'width':320,'params':{}};";
+          el.appendChild(s1);
+
+          var s2 = document.createElement('script');
+          s2.src = 'https://www.highperformanceformat.com/' + KEY_50 + '/invoke.js';
+
+          // Step 2: if 320x50 loads fine — done
+          s2.onload = function () {
+            // check after short delay if iframe actually appeared
+            setTimeout(function () {
+              if (!el.querySelector('iframe')) {
+                loadFallback(el); // loaded but no iframe = empty fill, try fallback
+              }
+            }, 2000);
+          };
+
+          // Step 3: onerror OR 5s timeout → load 300x250 fallback
+          var fallbackTimer = setTimeout(function () {
+            if (!el.querySelector('iframe')) {
+              loadFallback(el);
+            }
+          }, 5000);
+
+          s2.onerror = function () {
+            clearTimeout(fallbackTimer);
+            loadFallback(el);
+          };
+
+          el.appendChild(s2);
+
+          function loadFallback(container) {
+            // Clear previous failed scripts
+            container.innerHTML = '';
+            // Expand container smoothly — no layout shift, just smooth grow
+            container.classList.add('expanded');
+
+            var f1 = document.createElement('script');
+            f1.text = "atOptions={'key':'" + KEY_250 + "','format':'iframe','height':250,'width':300,'params':{}};";
+            container.appendChild(f1);
+
+            var f2 = document.createElement('script');
+            f2.src = 'https://www.highperformanceformat.com/' + KEY_250 + '/invoke.js';
+            container.appendChild(f2);
+          }
+        }
+
+        // Load all 3 slots
+        injectBannerWithFallback('ad-top-banner');
+        injectBannerWithFallback('ad-mid-banner');
+        injectAd('ad-bottom-300x250', KEY_250, 300, 250);
+
+      }, 1000); // 1 second after window.onload
     });
   </script>
 
