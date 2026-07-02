@@ -1,18 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', function () {
-    if (!document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) {
-        const adsScript = document.createElement('script');
-        adsScript.async = true;
-        adsScript.crossOrigin = 'anonymous';
-        adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8289065661129245';
-        document.head.appendChild(adsScript);
-    }
-    if (!document.querySelector('script[src*="resources.infolinks.com/js/infolinks_main.js"]')) {
-        const adsScript = document.createElement('script');
-        adsScript.type = 'text/javascript';
-        adsScript.src = 'http://resources.infolinks.com/js/infolinks_main.js';
-        document.head.appendChild(adsScript);
-    }
 
     // Animate year in footer
     const yearElement = document.getElementById('dynamic-year');
